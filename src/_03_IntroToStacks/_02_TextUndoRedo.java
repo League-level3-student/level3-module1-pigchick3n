@@ -1,7 +1,10 @@
 package _03_IntroToStacks;
 
+import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
+import java.util.Stack;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -21,13 +24,21 @@ public class _02_TextUndoRedo implements KeyListener {
 	 * 
 	 * */
 
+	
+	Stack<Character> labelName = new Stack<Character>();
+	ArrayList<Character> ar;
+	JFrame frame  = new JFrame();
+	JPanel panel  = new JPanel();
+	JLabel label  = new JLabel();
+	String str = "";
 
-	void start(){
-		JFrame frame  = new JFrame();
-		JPanel panel  = new JPanel();
-		JLabel label  = new JLabel();
+	void start(char labelName){
+		
 		frame.add(panel);
 		panel.add(label);
+		panel.setPreferredSize(new Dimension (600,600));
+	
+		label.setText(String.valueOf(labelName));
 		frame.pack();
 		frame.setVisible(true);
 		frame.addKeyListener(this);
@@ -36,16 +47,27 @@ public class _02_TextUndoRedo implements KeyListener {
 	@Override
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
-		int keycode = e.getKeyCode();
-		System.out.println(keycode);
-		
 	}
 
 	@Override
-	public void keyPressed(KeyEvent e) {
+	public void keyPressed(KeyEvent e1) {
 		// TODO Auto-generated method stub
 		
+		char keyChar = e1.getKeyChar();
+		System.out.println(keyChar);
+		str+=keyChar;
+		System.out.println(str);
+		label.setText(str);
+		frame.pack();
+		//labelName.push(keyChar);
+		//int sc = labelName.size();
+		//for(int i = 0; i < sc; i++){
+		//	label.setText(String.valueOf(labelName.pop()));
+		//}
+
+		
 	}
+	
 
 	@Override
 	public void keyReleased(KeyEvent e) {
