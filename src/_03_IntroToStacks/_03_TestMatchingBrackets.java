@@ -21,16 +21,21 @@ public class _03_TestMatchingBrackets {
 	// USE A STACK TO COMPLETE THE METHOD FOR CHECKING IF EVERY OPENING BRACKET HAS A MATCHING CLOSING BRACKET
 	private boolean doBracketsMatch(String b) {
 		for (int i = 0; i < b.length(); i++) {
-			if(b.charAt(i) == '{') {
-				brackets.push("{");
-			}	
+			if(b.charAt(0) == '}') {
+			return false;
+			}else if(b.charAt(i) == '{') {
+			brackets.push("{");	
+			}else if(b.charAt(i) == '}'){
+				brackets.pop();
+			}
+			
 		}
-	
-		if(b.contentEquals("{")){
-			brackets.push("{");
+		if(brackets.empty()) {
+			return true;
+		}else {
+			return false;
 		}
-		
-		return false;
+
 	}
 
 }
