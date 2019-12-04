@@ -19,8 +19,8 @@ public class _01_IntroToStack {
 		    numbers.push(randomness);
 		}
 		//3. Ask the user to enter in two numbers between 0 and 100, inclusive. 
-		String low = JOptionPane.showInputDialog("GIVE ME 2 NUMBERs BTWN 1 - 100 :)");
-		String high = JOptionPane.showInputDialog("GIVE ME 2 NUMBERs BTWN 1 - 100 :)");
+		String low = JOptionPane.showInputDialog("GIVE ME A NUMBERs BTWN 1 - 100 :)");
+		String high = JOptionPane.showInputDialog("GIVE ME A SMALLER NUMBERs BTWN 1 - 100 :)");
 		double lowval = Double.parseDouble(low);
 		double highval = Double.parseDouble(high);
 		//4. Pop all the elements off of the Stack. Every time a double is popped that 
