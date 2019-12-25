@@ -16,7 +16,9 @@ public class HangMan implements KeyListener {
 	Stack<String> words = new Stack<String>();
 	String current;
 	char[] guessWord;
+	char[] letters; 
 	int chars;
+	int lives;
 
 	void start() {
 
@@ -36,6 +38,7 @@ public class HangMan implements KeyListener {
 
 		getNextWord();
 		
+		letters = current.toCharArray();
 		
 			guessWord = new char[current.length()];
 		for (int i = 0; i < current.length(); i++) {
@@ -54,11 +57,22 @@ public class HangMan implements KeyListener {
 	}
 	public void keyPressed(KeyEvent e1) {
 
-		int keyCode = e1.getKeyCode();
+	
 		char keyChar = e1.getKeyChar();
 		System.out.println(keyChar);
-		System.out.println(keyCode);
-		
+
+	
+		for (int i = 0; i < current.length(); i++) {
+			if(keyChar == letters[i]) {
+				guessWord[i] = keyChar ;
+				
+			}else {
+				lives--;
+			}
+			
+		}
+		label.setText(new String(guessWord));
+	
 	}
 
 	@Override
