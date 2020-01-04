@@ -19,14 +19,15 @@ public class HangMan implements KeyListener {
 	char[] letters; 
 	int chars;
 	int lives;
+	int yeet;
 
 	void start() {
-
+		lives = 10;
 		frame.add(panel);
 		panel.add(label);
 		frame.setVisible(true);
 		frame.addKeyListener(this);
-		int numOfWords = Integer.parseInt(JOptionPane.showInputDialog("Yeety"));
+		int numOfWords = Integer.parseInt(JOptionPane.showInputDialog("How many words would you like to guess?"));
 
 		for (int i = 0; i < numOfWords;) {
 			String ran = Utilities.readRandomLineFromFile("dictionary.txt");
@@ -50,8 +51,10 @@ public class HangMan implements KeyListener {
 	}
 
 	public void getNextWord() {
+		label.setText("");
 		if (!words.isEmpty()) {
 			current = words.pop();
+			lives=10;
 		}
 
 	}
@@ -61,18 +64,33 @@ public class HangMan implements KeyListener {
 		char keyChar = e1.getKeyChar();
 		System.out.println(keyChar);
 
-	
+		boolean hasChanged = false;
 		for (int i = 0; i < current.length(); i++) {
 			if(keyChar == letters[i]) {
-				guessWord[i] = keyChar ;
-				
-			}else {
-				lives--;
+				guessWord[i] = keyChar;
+				hasChanged = true;
 			}
 			
 		}
+		if (hasChanged == false) {
+			lives--;
+		}
+		if(lives<=0) {
+			yeet = JOptionPane.showConfirmDialog(null, "try again?");
+			if (yeet == 1) {
+			System.exit(0);
+			}else if(yeet == 0) {
+				for (int i = 0; i < words.size(); i++) {
+					words.pop();
+				}
+				start();
+			}
+			}
+		
 		label.setText(new String(guessWord));
-	
+	if(guessWord .equals (letters)) {
+	getNextWord();	
+	}
 	}
 
 	@Override
