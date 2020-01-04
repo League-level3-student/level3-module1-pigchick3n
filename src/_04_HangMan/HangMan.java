@@ -16,7 +16,7 @@ public class HangMan implements KeyListener {
 	Stack<String> words = new Stack<String>();
 	String current;
 	char[] guessWord;
-	char[] letters; 
+	char[] letters;
 	int chars;
 	int lives;
 	int yeet;
@@ -38,12 +38,12 @@ public class HangMan implements KeyListener {
 		}
 
 		getNextWord();
-		
+
 		letters = current.toCharArray();
-		
-			guessWord = new char[current.length()];
+
+		guessWord = new char[current.length()];
 		for (int i = 0; i < current.length(); i++) {
-			guessWord[i]= '_';
+			guessWord[i] = '_';
 			label.setText(new String(guessWord));
 		}
 		frame.pack();
@@ -54,55 +54,55 @@ public class HangMan implements KeyListener {
 		label.setText("");
 		if (!words.isEmpty()) {
 			current = words.pop();
-			lives=10;
+			lives = 10;
 		}
 
 	}
+
 	public void keyPressed(KeyEvent e1) {
 
-	
 		char keyChar = e1.getKeyChar();
 		System.out.println(keyChar);
 
 		boolean hasChanged = false;
 		for (int i = 0; i < current.length(); i++) {
-			if(keyChar == letters[i]) {
+			if (keyChar == letters[i]) {
 				guessWord[i] = keyChar;
 				hasChanged = true;
 			}
-			
+
 		}
 		if (hasChanged == false) {
 			lives--;
 		}
-		if(lives<=0) {
+		if (lives <= 0) {
 			yeet = JOptionPane.showConfirmDialog(null, "try again?");
 			if (yeet == 1) {
-			System.exit(0);
-			}else if(yeet == 0) {
+				System.exit(0);
+			} else if (yeet == 0) {
 				for (int i = 0; i < words.size(); i++) {
 					words.pop();
 				}
 				start();
 			}
-			}
-		
+		}
+
 		label.setText(new String(guessWord));
-	if(guessWord .equals (letters)) {
-	getNextWord();	
-	}
+		if (guessWord.equals(letters)) {
+			getNextWord();
+		}
 	}
 
 	@Override
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }
