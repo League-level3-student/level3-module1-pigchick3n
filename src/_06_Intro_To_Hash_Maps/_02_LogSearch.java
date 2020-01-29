@@ -3,6 +3,7 @@ package _06_Intro_To_Hash_Maps;
 import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
@@ -18,20 +19,26 @@ public class _02_LogSearch implements ActionListener {
 	JButton button1 = new JButton();
 	JButton button2 = new JButton();
 	JButton button3 = new JButton();
+	JButton button4 = new JButton();
+	String ids = "";
+	int things;
 
 	void GUI() {
 		frame.add(panel);
 		panel.add(button1);
 		panel.add(button2);
 		panel.add(button3);
-		frame.pack();
+		panel.add(button4);
 		frame.setVisible(true);
 		button1.setText("Add Entry");
 		button2.setText("Search for ID");
 		button3.setText("Display List");
+		button4.setText("Remove Entry");
 		button1.addActionListener(this);
 		button2.addActionListener(this);
 		button3.addActionListener(this);
+		button4.addActionListener(this);
+		frame.pack();
 
 	}
 	/*
@@ -61,7 +68,7 @@ public class _02_LogSearch implements ActionListener {
 		JButton buttonPressed = (JButton) e.getSource();
 
 		if (buttonPressed == button1) {
-			
+
 			String idnumber = JOptionPane.showInputDialog("Enter your ID number");
 			String name = JOptionPane.showInputDialog("Enter your name");
 			int id = Integer.parseInt(idnumber);
@@ -70,19 +77,33 @@ public class _02_LogSearch implements ActionListener {
 			String requestID = JOptionPane.showInputDialog("Enter a ID number");
 			int requestedID = Integer.parseInt(requestID);
 			for (int i : identification.keySet()) {
-				if(i == requestedID) {
+				if (i == requestedID) {
 					String stuff = identification.get(requestedID);
-					System.out.println(stuff);
-				}else {
+					JOptionPane.showMessageDialog(null, stuff);
+				} else {
 					System.out.println("oof");
+				}
+
+			}
+		} else if (buttonPressed == button3) {
+			ids = "";
+			for (Entry<Integer, String> entry : identification.entrySet()) {
+				ids += entry.getKey() + ": ";
+				ids += entry.getValue() + "  ";
+
+			}
+			JOptionPane.showMessageDialog(null, ids);
+		} else if (buttonPressed == button4) {
+			String deleteID = JOptionPane.showInputDialog("Enter a ID number");
+			int requestedID = Integer.parseInt(deleteID);
+			for (int i : identification.keySet()) {
+				if (i == requestedID) {
+					things = i;
+
 				}
 				
 			}
-		} else if (buttonPressed == button3) {
-			for(Entry<Integer, String> entry : identification.entrySet()){
-				System.out.println(entry.getKey());
-				System.out.println(entry.getValue());
-			}
+			identification.remove(things);
 		}
 	}
 
